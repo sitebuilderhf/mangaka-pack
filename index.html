@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mangaka Pack</title>
+<meta name="description" content="Turn your Higgsfield Mangaka story and its input photo into an Instagram Reel or carousel, right in your browser.">
+<meta name="theme-color" content="#111314">
+<meta property="og:title" content="Mangaka Pack">
+<meta property="og:description" content="Turn your Higgsfield Mangaka story and its input photo into an Instagram Reel or carousel, right in your browser.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="og.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Inter:wght@600;900&family=JetBrains+Mono:wght@500;700&family=Manrope:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="mangaka-pack.css">
+<style>html,body{margin:0;background:#111314}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<div class="mp">
+<div class="wrap">
+  <header>
+    <img src="logo.png" alt="Higgsfield Mangaka" width="270" height="146">
+    <div>
+      <h1>Mangaka Pack</h1>
+      <p>Drop in the manga you made with Higgsfield Mangaka and your input photo. Get a Reel or a carousel ready to post on Instagram.</p>
+    </div>
+  </header>
+
+  <div class="main">
+    <section class="panel" aria-label="Your manga">
+      <div class="step">
+        <h2><span class="n">01</span> Manga</h2>
+        <label class="drop" id="dropManga">
+          <input id="fileManga" type="file" accept="application/pdf,image/*" multiple>
+          <img class="thumb" id="thumbManga" alt="">
+          <span class="txt"><span class="t1">Upload PDF or page images</span><br><span class="t2" id="infoManga">No file yet</span></span>
+        </label>
+      </div>
+      <div class="step">
+        <h2><span class="n">02</span> Input photo</h2>
+        <label class="drop" id="dropPhoto">
+          <input id="filePhoto" type="file" accept="image/*" multiple>
+          <img class="thumb" id="thumbPhoto" alt="">
+          <span class="txt"><span class="t1">Upload your input photos (1 to 4)</span><br><span class="t2" id="infoPhoto">No file yet</span></span>
+        </label>
+      </div>
+      <div class="step">
+        <h2><span class="n">03</span> Prompt <span class="hint">· shown in the Reel</span></h2>
+        <textarea id="prompt" aria-label="Prompt" placeholder="Paste the prompt you gave Mangaka for this story."></textarea>
+        <p class="hint">Blank lines split paragraphs. Long prompts get a smaller font.</p>
+      </div>
+      <div class="step">
+        <h2><span class="n">04</span> Format</h2>
+        <div class="seg" role="group" aria-label="Format">
+          <button id="fmtReels" aria-pressed="true">Reel<small>9:16 · 1080×1920</small></button>
+          <button id="fmtCar" aria-pressed="false">Carousel<small>5:4 · 1350×1080</small></button>
+        </div>
+        <div class="row"><label for="speed">Seconds per page</label><output id="speedOut"></output></div>
+        <input id="speed" type="range" min="1.5" max="8" step="0.1">
+        <div id="carOpts" hidden>
+          <div class="row"><label for="vidPages">Pages in the video slide</label><output id="vidPagesOut"></output></div>
+          <input id="vidPages" type="range" min="1" max="6" step="1" value="3">
+        </div>
+        <p class="notes" id="fmtNote"></p>
+      </div>
+      <div class="step">
+        <button class="btn" id="export">Export</button>
+        <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+        <p class="status" id="status" role="status"></p>
+      </div>
+    </section>
+
+    <section class="stage" aria-label="Preview">
+      <div class="stage-top">
+        <div class="ctrl">
+          <span class="meta" id="meta"></span>
+        </div>
+        <button class="ghost" id="play">Pause</button>
+      </div>
+      <div class="view"><canvas id="view" width="1080" height="1920"></canvas></div>
+      <div class="pager" id="pager" hidden></div>
+    </section>
+  </div>
+</div>
+</div>
+<script type="module">import { init } from "./engine.js"; init();</script>
+</body>
+</html>
